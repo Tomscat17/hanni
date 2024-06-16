@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="PHAM-ASTROBLANCO.html">
+    <link rel="stylesheet" href="PHAM-ASTRONEGRO.html">
+    <link rel="stylesheet" href="PHAM-ASTROROJO.html">
+    <link rel="stylesheet" href="css/productos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            margin-top: 30px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .list-group-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            margin-bottom: 10px;
+            background-color: #fafafa;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .list-group-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-info h5 {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .product-info p {
+            margin: 5px 0;
+            color: #777;
+        }
+
+        .btn-danger, .btn-secondary, .btn-primary {
+            margin-left: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-danger:hover, .btn-secondary:hover, .btn-primary:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
+
+        .btn-vaciar {
+            margin-top: 20px;
+            background-color: #dc3545;
+            border-color: #dc3545;
+            color: #fff;
+            margin-right: 2px;
+        }
+        .btn-primary{
+            margin-top: 20px;
+            margin-left: 2px;
+        }
+
+        .btn-vaciar:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+
+        .summary {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            text-align: right;
+            color: #333;
+        }
+
+        .btn-pagar {
+            margin-top: 20px;
+            background-color: #28a745;
+            border-color: #28a745;
+            color: #fff;
+        }
+
+        .btn-pagar:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Carrito de Compras</h2>
+        <div id="carrito"></div>
+        <a href="index.html" class="btn btn-primary">Volver a la Tienda</a>
+        <button id="vaciar-carrito" class="btn btn-secondary btn-vaciar">Vaciar Carrito</button>
+        <button id="pagar-carrito" class="btn btn-success btn-pagar">Pasar a pagar</button>
+        <div id="total" class="summary"></div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            const carritoDiv = document.getElementById('carrito');
+            const totalDiv = document.getElementById('total');
+
+            if (carrito.length === 0) {
+                carritoDiv.innerHTML = '<p>El carrito está vacío.</p>';
+            } else {
+                let carritoHTML = '<ul class="list-group">';
+                let totalPagar = 0;
+                carrito.forEach((item, index) => {
+                    totalPagar += item.totalPagar;
+                    carritoHTML += `<li class="list-group-item">
+                        <div class="product-info">
+                            <h5>Producto PHAM ASTRO-1 de color: ${item.color}</h5>
+                            <p>Color: ${item.color}</p>
+                            <p>Talla: ${item.talla}</p>
+                            <p>Precio normal: 20000 </p>
+                            <p>Precio final zapatilla: $${item.precio}</p>
+                            <p>Valor de entrega: $${item.costoEntrega}</p>
+                            <p>Datos de entrega: ${item.datosEntrega}</p>
+                            <p>Total a pagar: $${item.totalPagar}</p>
+                        </div>
+                        <button class="btn btn-danger" onclick="eliminarProducto(${index})">Eliminar</button>
+                    </li>`;
+                });
+                carritoHTML += '</ul>';
+                carritoDiv.innerHTML = carritoHTML;
+                totalDiv.innerHTML = `<h5>Total a pagar: $${totalPagar}</h5>`;
+            }
+
+            document.getElementById('vaciar-carrito').addEventListener('click', vaciarCarrito);
+            document.getElementById('pagar-carrito').addEventListener('click', pagarCarrito);
+        }
+
+        function eliminarProducto(index) {
+            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            carrito.splice(index, 1);
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+            window.location.reload();
+        }
+
+        function vaciarCarrito() {
+            localStorage.removeItem('carrito');
+            window.location.reload();
+        }
+
+        function pagarCarrito() {
+            alert('¡Se ha realizado correctamente su compra!');
+            localStorage.removeItem('carrito');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

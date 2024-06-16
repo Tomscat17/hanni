@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selector de Zapatillas</title>
+    <link rel="stylesheet" href="css/productos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-top: 1550px;
+            font-size: 4rem;
+            letter-spacing: 2px;
+            padding: 2rem 3rem;
+            color: #ffffff;
+            text-shadow: 2px 2px 8px #000;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .card-contenedor {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            max-width: 1200px; 
+            margin-top: 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 700px; 
+            flex: 1; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .color-seleccion, .talla-seleccion {
+            margin-bottom: 20px;
+        }
+
+        .color-seleccion label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .talla-seleccion {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .talla-item {
+            position: relative;
+            display: inline-block;
+            margin: 10px;
+            width: 80px; 
+            height: 80px;
+            border: 1px solid #dcdcdc;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            vertical-align: middle;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .color-item.black {
+            background-color: black;
+        }
+        .talla-item:hover {
+            border-color: #999;
+        }
+
+        .informacion-hover {
+            position: absolute;
+            top: -90px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px; 
+            background-color: #fff;
+            border: 1px solid #dcdcdc;
+            border-radius: 5px;
+            padding: 5px;
+            display: none;
+            z-index: 2;
+            font-size: 0.8rem;
+        }
+
+        .talla-item:hover .informacion-hover {
+            display: block;
+        }
+
+        .hover-item-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 2px 0;
+        }
+        #buy-button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 15px;
+            background-color: #007bff59;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease;
+        }
+
+        #buy-button:hover {
+            background-color: #00ff59af;
+        }
+
+        #advertencia{
+            text-align: center;
+            align-self:center;
+            color: red;
+            font-size: 0.8rem;
+        }
+        .imagen-contenedor {
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            max-width: 600px; 
+            max-height: 600px;
+            border-radius: 10px;
+        }
+
+        .imagen-contenedor img {
+            width: 100%;
+            height: auto;
+            object-fit: cover; 
+        }
+
+        #condiciones{
+            margin-top: -18px;
+            color: red;
+        }
+
+        h6{
+            margin-top: -20px;
+        }
+
+        .footer-creds {
+            display: flex;
+            justify-content: center;
+            margin-right: 30px;
+        }
+
+        #volver-button {
+            display: inline-block;
+            font-size: 1.2rem;
+            color: #fff;
+            background: linear-gradient(45deg, #ff0000, #ff7f00);
+            border: none;
+            border-radius: 50px;
+            padding: 10px 30px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+            text-decoration: none;
+            margin-top: 20px;
+            margin-bottom: 20px; 
+            align-self: flex-end; 
+            margin-left: 263px;
+        }
+        .footer-section{
+            max-width: 1200px;
+            margin: 0 auto;
+
+        }
+
+        .menu-footer-section{
+            padding: 14rem 6;
+
+        }
+
+        #Cuenta {
+            margin-left:-2rem;
+            margin-right: 3.5rem;
+        }
+        .wrap-social-logos ul, .wrap-menu-footer-section ul{
+
+            display: flex;
+            justify-content: center;
+            margin-right: 20px;
+            list-style-type: none;
+            padding: 0; 
+        }
+
+        .social-logo{
+            max-width: 35px;
+            width: 40%;
+            padding: 1rem;
+            margin-right: 50px;
+
+        }
+
+        .wrap-menu-footer-section ul li{
+            font-size: 1.1rem ;
+            padding: 30px;
+            margin-right: 2.5rem;
+            margin-left: -1rem;
+            padding-right: 1rem;
+            
+        }
+
+
+        .footer-creds  {
+            display: flex;
+            justify-content: center;
+            margin-right: 30px;
+            
+        }
+        #volver-button:hover {
+            background: linear-gradient(45deg, #ff7f00, #ff0000);
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        #volver-button:active {
+            transform: scale(0.95);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .table-responsive {
+            margin: 20px 0;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th,
+        .table td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f8f8f8;
+            font-weight: bold;
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .talla-item {
+            cursor: pointer;
+            margin-bottom: 10px;
+            width: auto;
+            height: auto;
+        }
+
+        .talla-cuadro.selected {
+            background-color: #007bff;
+            color: #fff;
+            border-color: #007bff;
+        }
+
+        .envio-opciones {
+            margin-top: 20px;
+            display: block; 
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .talla-cuadro {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            margin: 5px;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            margin-top: 4px;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br>
+   
+    <h1>PHAM ASTRO-1 BLANCA</h1>
+
+ 
+    <div class="card-contenedor">
+        <div class="card">
+            <h2>Descripción:</h2>
+
+            <p>Los nuevos colores y las texturas frescas ofrecen un
+                 ASTRO-1 artesanal que mantiene el look clásico y la sensación familiar. Que demuestra el esfuerzo
+                 de esta emprendedora Hanni Pham.
+                 Esta zapatilla está confeccionada con materiales premium y 
+                 adornada con bordes sin rematar y con costuras en contraste.
+            </p>
+            <ul>
+                
+                <p>
+                    Características y materiales: </p>
+                <p>
+                <p>-------------------------------------------</p>    
+                <li>El cuero ofrece durabilidad y estructura.</li>
+                <li>La unidad ASTRO-1 encapsulada proporciona amortiguación ligera.</li>
+                <li>La suela de goma te brinda tracción en distintos tipos de superficies.</li>
+
+                <p> Datos del producto</p>
+                <p>-------------------------------------------</p>  
+                <li>Logotipo Wings en el talón</li>
+                <li>Logotipo Swoosh cosido</li>
+                <li>Diseño Jumpman en la lengüeta</li>
+            </ul>
+            
+            
+
+            <h3>Precio: $20.000</h3>
+            <h4 id="condiciones">Sujeto a cambios acorde a su talla.</h4>
+            <br>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="width: 20%;">Centímetros</th>
+                            <th style="width: 80%;">Color blanco</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>22 cm a 25 cm</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-12">$ 0</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>25.5 cm a 27 cm</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-12">$ 4.000 </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>27.5 cm a 29.5 cm</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-12">$ 6.000</div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+            </div>
+            
+            <br>
+            <h2>Selecciona tu Talla:</h2>
+            <h6>Tamaño representado en CM</h6>
+            <div class="talla-seleccion">
+                <!-- Tallas --> 
+                 <!--22CM-->
+                <div class="talla-item">
+                    <div class="informacion-hover">
+                        <p class="hover-item-container">
+                            <span class="hover-item">EU</span>
+                            <span class="hover-item">35</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">US</span>
+                            <span class="hover-item">5</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">CM</span>
+                            <span class="hover-item">22</span>
+                        </p>
+                    </div>
+                    <div class="talla-cuadro" data-talla="22">22</div>
+                </div>
+                <!--22.5cm-->
+                <div class="talla-item">
+                    <div class="informacion-hover">
+                        <p class="hover-item-container">
+                            <span class="hover-item">EU</span>
+                            <span class="hover-item">35.5</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">US</span>
+                            <span class="hover-item">5.5</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">CM</span>
+                            <span class="hover-item">22.5</span>
+                        </p>
+                    </div>
+                    <div class="talla-cuadro" data-talla="22.5">22.5</div>
+                </div>
+                
+                <!--23cm-->
+
+                <div class="talla-item">
+                    <div class="informacion-hover">
+                        <p class="hover-item-container">
+                            <span class="hover-item">EU</span>
+                            <span class="hover-item">37 1/3</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">US</span>
+                            <span class="hover-item">5</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">CM</span>
+                            <span class="hover-item">23</span>
+                        </p>
+                    </div>
+                    <div class="talla-cuadro" data-talla="23">23</div>
+                </div>
+
+                <!--23.5cm-->
+
+                <div class="talla-item">
+                    <div class="informacion-hover">
+                        <p class="hover-item-container">
+                            <span class="hover-item">EU</span>
+                            <span class="hover-item">38</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">US</span>
+                            <span class="hover-item">5.5</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">CM</span>
+                            <span class="hover-item">23.5</span>
+                        </p>
+                    </div>
+                    <div class="talla-cuadro" data-talla="23.5">23.5</div>
+                </div>
+                <!--24cm-->
+
+                <div class="talla-item">
+                    <div class="informacion-hover">
+                        <p class="hover-item-container">
+                            <span class="hover-item">EU</span>
+                            <span class="hover-item">38 2/3</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">US</span>
+                            <span class="hover-item">6</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">CM</span>
+                            <span class="hover-item">24</span>
+                        </p>
+                    </div>
+                    <div class="talla-cuadro" data-talla="24">24</div>
+                </div>
+
+
+                <!--24.5cm-->
+
+                <div class="talla-item">
+                    <div class="informacion-hover">
+                        <p class="hover-item-container">
+                            <span class="hover-item">EU</span>
+                            <span class="hover-item">39 1/3</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">US</span>
+                            <span class="hover-item">6.5</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">CM</span>
+                            <span class="hover-item">24.5</span>
+                        </p>
+                    </div>
+                    <div class="talla-cuadro" data-talla="24.5">24.5</div>
+                </div>
+                <!--25cm-->
+
+                <div class="talla-item">
+                    <div class="informacion-hover">
+                        <p class="hover-item-container">
+                            <span class="hover-item">EU</span>
+                            <span class="hover-item">40</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">US</span>
+                            <span class="hover-item">7</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">CM</span>
+                            <span class="hover-item">25</span>
+                        </p>
+                    </div>
+                    <div class="talla-cuadro" data-talla="25">25</div>
+                </div>
+                <!--25.5cm-->
+
+
+                <div class="talla-item">
+                    <div class="informacion-hover">
+                        <p class="hover-item-container">
+                            <span class="hover-item">EU</span>
+                            <span class="hover-item">40 2/3</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">US</span>
+                            <span class="hover-item">7.5</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">CM</span>
+                            <span class="hover-item">25.5</span>
+                        </p>
+                    </div>
+                    <div class="talla-cuadro" data-talla="25.5">25.5</div>
+                </div>
+                <!--26cm-->
+
+                <div class="talla-item">
+                    <div class="informacion-hover">
+                        <p class="hover-item-container">
+                            <span class="hover-item">EU</span>
+                            <span class="hover-item">41 1/3</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">US</span>
+                            <span class="hover-item">8</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">CM</span>
+                            <span class="hover-item">26</span>
+                        </p>
+                    </div>
+                    <div class="talla-cuadro" data-talla="26">26</div>
+                </div>
+                <!--26.5cm-->
+
+
+                <div class="talla-item">
+                    <div class="informacion-hover">
+                        <p class="hover-item-container">
+                            <span class="hover-item">EU</span>
+                            <span class="hover-item">42</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">US</span>
+                            <span class="hover-item">8.5</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">CM</span>
+                            <span class="hover-item">26.5</span>
+                        </p>
+                    </div>
+                    <div class="talla-cuadro" data-talla="26.5">26.5</div>
+                </div>
+                <!--27cm-->
+
+                <div class="talla-item">
+                    <div class="informacion-hover">
+                        <p class="hover-item-container">
+                            <span class="hover-item">EU</span>
+                            <span class="hover-item">42 2/3</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">US</span>
+                            <span class="hover-item">9</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">CM</span>
+                            <span class="hover-item">27</span>
+                        </p>
+                    </div>
+                    <div class="talla-cuadro" data-talla="27">27</div>
+                </div>
+                <!--27.5cm-->
+
+
+                <div class="talla-item">
+                    <div class="informacion-hover">
+                        <p class="hover-item-container">
+                            <span class="hover-item">EU</span>
+                            <span class="hover-item">43 1/3</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">US</span>
+                            <span class="hover-item">9.5</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">CM</span>
+                            <span class="hover-item">27.5</span>
+                        </p>
+                    </div>
+                    <div class="talla-cuadro" data-talla="27.5">27.5</div>
+                </div>
+                <!--28cm-->
+
+                <div class="talla-item">
+                    <div class="informacion-hover">
+                        <p class="hover-item-container">
+                            <span class="hover-item">EU</span>
+                            <span class="hover-item">44</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">US</span>
+                            <span class="hover-item">10</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">CM</span>
+                            <span class="hover-item">28</span>
+                        </p>
+                    </div>
+                    <div class="talla-cuadro" data-talla="28">28</div>
+                </div>
+                <!--28.5cm-->
+
+
+                <div class="talla-item">
+                    <div class="informacion-hover">
+                        <p class="hover-item-container">
+                            <span class="hover-item">EU</span>
+                            <span class="hover-item">44 2/3</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">US</span>
+                            <span class="hover-item">10.5</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">CM</span>
+                            <span class="hover-item">28.5</span>
+                        </p>
+                    </div>
+                    <div class="talla-cuadro" data-talla="28.5">28.5</div>
+                </div>
+                <!--29cm-->
+
+                <div class="talla-item">
+                    <div class="informacion-hover">
+                        <p class="hover-item-container">
+                            <span class="hover-item">EU</span>
+                            <span class="hover-item">45 1/3</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">US</span>
+                            <span class="hover-item">11</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">CM</span>
+                            <span class="hover-item">29</span>
+                        </p>
+                    </div>
+                    <div class="talla-cuadro" data-talla="29">
+                        29
+        
+                    </div>
+                </div>
+
+                <!--29.5cm-->
+
+
+                <div class="talla-item">
+                    <div class="informacion-hover">
+                        <p class="hover-item-container">
+                            <span class="hover-item">EU</span>
+                            <span class="hover-item">46</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">US</span>
+                            <span class="hover-item">11.5</span>
+                        </p>
+                        <p class="hover-item-container">
+                            <span class="hover-item">CM</span>
+                            <span class="hover-item">29.5</span>
+                        </p>
+                    </div>
+                    <div class="talla-cuadro" data-talla="29.5">29.5</div>
+                </div>
+
+                <br><br>
+                <div class="envio-opciones" >
+                    <h4>Opciones de entrega</h4>
+                    <div>
+                        <input type="radio" id="entrega" name="entrega" value="retiro">
+                        <label for="retiro">Retiro en domicilio de la vendedora</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="entrega" name="entrega" value="entrega">
+                        <label for="entrega">Entrega a domicilio (+$4000)</label>
+                    </div>
+                    <div id="datos-entrega" style="display: none;">
+                        <div class="form-group" >
+                            <label for="direccionInput">Dirección:</label>
+                            <input type="text" id="direccionInput" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefonoInput">Teléfono:</label>
+                            <input type="text" id="telefonoInput" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+                <p id="advertencia">*para desbloquear este botón debes ingresar todos los campos</p>
+                <button id="buy-button" class="btn btn-primary" disabled>Agregar al carrito</button>
+
+                <br>
+                <div>
+                <a id="volver-button" class="btn btn-primary d-none" href="index.html" role="button">Volver</a></div>
+            </div>
+            
+    <script>
+        const tallas = document.querySelectorAll('.talla-cuadro');
+        let tallaSeleccionada = null;
+
+        tallas.forEach(talla => {
+            talla.addEventListener('click', () => {
+                if (tallaSeleccionada) {
+                    tallaSeleccionada.classList.remove('selected');
+                }
+                talla.classList.add('selected');
+                tallaSeleccionada = talla;
+                document.querySelector('.envio-opciones').style.display = 'block';
+                document.getElementById('talla-cuadro').setAttribute('required', true);
+                checkFormcompleto();
+            });
+        });
+
+        document.querySelectorAll('input[name="entrega"],input[name="envio"]').forEach(input => {
+        input.addEventListener('change', () => {
+
+            if (!tallaSeleccionada) {
+                alert('Por favor, selecciona una talla antes de elegir una opción de entrega.');
+                input.checked = false;
+                return;
+            }
+
+            if (input.value === 'entrega') {
+              
+                document.getElementById('datos-entrega').style.display = 'block';
+                document.getElementById('direccionInput').setAttribute('required', true);
+                document.getElementById('telefonoInput').setAttribute('required', true);
+                document.getElementById('buy-button').disabled = true; 
+                checkFormcompleto(); 
+                alert('Debes Ingresar todos los datos correspondientes si es que seleccionas envío para desbloquear el botón de compra')
+            } else {
+                document.getElementById('datos-entrega').style.display = 'none';
+                document.getElementById('direccionInput').removeAttribute('required');
+                document.getElementById('telefonoInput').removeAttribute('required');
+                document.getElementById('buy-button').disabled = false; 
+                
+            }
+        });
+    });
+
+        document.getElementById('direccionInput').addEventListener('input', checkFormcompleto);
+        document.getElementById('telefonoInput').addEventListener('input', checkFormcompleto);
+
+        function checkFormcompleto() {
+            const direccion = document.getElementById('direccionInput').value.trim();
+            const telefono = document.getElementById('telefonoInput').value.trim();
+
+            if (direccion !== '' && telefono !== '') {
+                document.getElementById('buy-button').disabled = false;
+            } else {
+                document.getElementById('buy-button').disabled = true;
+            }
+        }
+
+
+        document.getElementById('buy-button').addEventListener('click', () => {
+            const talla = tallaSeleccionada ? tallaSeleccionada.getAttribute('data-talla') : null;
+            const color = 'blanco';  
+            const precioBase = 20000;
+            let precioFinal = precioBase;
+            let valorañadido =0;
+            if (talla >= 22 && talla <= 25) {
+                precioFinal += 0;
+                valorañadido += 0;
+            } else if (talla >= 25.5 && talla <= 27) {
+                precioFinal += 4000;
+                valorañadido += 4000;
+            } else if (talla >= 27.5 && talla <= 29.5) {
+                precioFinal += 6000;
+                valorañadido +=6000
+            }   
+
+            const entregaSelect = document.querySelector('input[name="entrega"]:checked');
+            const costoEntrega = entregaSelect.value === 'entrega' ? 4000 : 0;
+
+            let datosEntrega = '';
+            if (entregaSelect.value === 'entrega') {
+                const direccionInput = document.getElementById('direccionInput').value;
+                const telefonoInput = document.getElementById('telefonoInput').value;
+                datosEntrega = `Dirección: ${direccionInput}, Teléfono: ${telefonoInput}`;
+            }
+            else{
+                datosEntrega = 'Dirección: Hogar vendedora'
+            }
+
+            const totalPagar = precioFinal + costoEntrega;
+
+            alert(`Resumen de compra:
+                - Color de la zapatilla: ${color}
+                - Talla: ${talla}
+                - Precio normal: 20000
+                - Valor añadido por talla: $${valorañadido}
+                - Precio final de la zapatilla: $${precioFinal}
+                - Valor de entrega: $${costoEntrega}
+                - Datos de entrega: ${datosEntrega}
+                - Total a pagar: $${totalPagar}`);
+
+            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            carrito.push({
+                color: color,
+                talla: talla,
+                precio: precioFinal,
+                costoEntrega: costoEntrega,
+                datosEntrega: datosEntrega,
+                totalPagar: totalPagar
+            });
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+
+            window.location.href = 'carrito.html';
+        });
+
+        window.onload = function() {
+            document.getElementById('buy-button').classList.add('d-none');  
+        }
+    </script>
+
+    <div class="imagen-contenedor">
+        <img id="producto-imagen" src="imagenes/AIR JORDAN BLANCO.webp" alt="Zapatilla blanca">
+    </div>
+    <br><br><hr><br><br>
+    
+    <!-- pie de página-->
+    <footer class="footer-section">
+        <div class="wrap-footer-section">
+
+            <div class="wrap-social-logos">
+
+                <ul>
+                    <!-- solo redirecciona a los sitios web oficiales debido a que no existen cuentas para la empresa
+                    ficticia, de igual manera puse nicknames ficticios -->
+                    <li>
+                        <div class="CONTAINER">
+                            <a href="https://web.facebook.com/">
+                                <img src="imagenes/facebook.png" alt=" logo facebook" class="social-logo">
+                            </a>
+                            <p id="Cuenta">@PhamSneakersValdivia</p>
+                        </div>
+                    </li>
+
+
+                    <li>
+                        <div class="CONTAINER">
+                            <a href="https://twitter.com/">
+                                
+                                <img src="imagenes/Nuevo-logo-de-Twitter.jpg" alt="logo twitter" class="social-logo">
+                            </a>
+                            <p id="Cuenta">@PhamSneakersLosRios</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="CONTAINER">
+                            <a href="https://www.instagram.com/">
+                                <img src="imagenes/logo-instagram-1080p.png" alt="logo instagram" class="social-logo">
+                            </a>
+                            <p id="Cuenta">@PhamSneakers</p>
+                        </div>
+                    </li>
+
+
+                </ul>
+
+            </div>
+
+            <br>
+            <hr>
+
+            <div class="menu-footer-section">
+                <div class="wrap-menu-footer-section">
+
+                    <ul> 
+
+                        <li><a href="#Inicio" > Inicio</a></li>
+                        <li><a href="#Productos">Productos</a></li>
+                        <li><a href="#Acerca">Acerca de</a></li>
+                        <li><a href="carrito.html"> 🛒</a></li>
+
+                    </ul>
+
+                </div>
+            </div>
+
+            <hr>
+        </div>
+
+        <div class="menu-footer-section">
+
+            <div class="footer-creds">
+
+                    <p>@Copyright 2024- PhamSneakers. Todos los derechos reservados.  Fono: +56983409865</p>
+
+            </div>
+
+
+        </div>
+
+    </footer>
+</body>
+</html>
